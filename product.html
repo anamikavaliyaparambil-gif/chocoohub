@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChocoHub | Chocolate Collection</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, serif;
+    background: #faf5ee;
+    color: #43251d;
+}
+
+/* NAVIGATION */
+nav {
+    background: #351a16;
+    color: #fff8ed;
+    padding: 22px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #e3b77d;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff8ed;
+    margin-left: 22px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #e3b77d;
+}
+
+#cartCount {
+    color: #e3b77d;
+    font-weight: bold;
+}
+
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    padding: 65px 20px 50px;
+    background: linear-gradient(135deg, #f0dfcb, #fffaf3);
+}
+
+.hero small {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #966344;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+}
+
+.hero h1 {
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: normal;
+    margin: 20px 0;
+}
+
+.hero h1 span {
+    color: #a56847;
+    font-style: italic;
+}
+
+.hero p {
+    color: #806c60;
+    font-family: Arial, sans-serif;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+/* CATEGORY LINKS */
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 30px 15px;
+}
+
+.categories a {
+    text-decoration: none;
+    color: #684638;
+    border: 1px solid #d9c5b0;
+    padding: 11px 20px;
+    border-radius: 30px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.categories a:hover,
+.categories a:first-child {
+    background: #51291f;
+    color: white;
+}
+
+/* PRODUCT SECTION */
+.products {
+    padding: 20px 6% 75px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.section-heading h2 {
+    font-size: 29px;
+    font-weight: normal;
+}
+
+.section-heading p {
+    font-family: Arial, sans-serif;
+    color: #927665;
+    font-size: 13px;
+}
+
+/* PRODUCT GRID */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background: #fffdf9;
+    border: 1px solid #eee1d3;
+    border-radius: 13px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px #49251b18;
+}
+
+.product-image {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    background: #ead8c4;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.product-card:hover img {
+    transform: scale(1.06);
+}
+
+.tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #fff8ed;
+    color: #784a32;
+    padding: 7px 10px;
+    border-radius: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+}
+
+.product-info {
+    padding: 17px;
+}
+
+.rating {
+    color: #b78943;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.product-info h3 {
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 9px;
+}
+
+.description {
+    color: #8c786c;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.7;
+    min-height: 41px;
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 17px;
+}
+
+.price {
+    font-size: 21px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.add-btn {
+    background: #51291f;
+    color: white;
+    border: none;
+    padding: 10px 11px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: #986044;
+}
+
+/* CART MESSAGE */
+.cart-message {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #351a16;
+    color: white;
+    padding: 16px 22px;
+    border-radius: 9px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    box-shadow: 0 8px 25px #0002;
+    display: none;
+    z-index: 100;
+}
+
+/* FOOTER */
+footer {
+    background: #351a16;
+    color: #fff3e4;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+footer h2 {
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+footer p {
+    color: #d4bca9;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 2;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1100px) {
+    .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .products {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+}
+
+@media (max-width: 800px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    nav {
+        padding: 20px 4%;
+    }
+
+    nav a {
+        margin-left: 10px;
+    }
+
+    .product-image {
+        height: 230px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image {
+        height: 280px;
+    }
+
+    .hero {
+        padding: 45px 15px;
+    }
+
+    .section-heading h2 {
+        font-size: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="logo">Choco<span>Hub.</span></div>
+
+    <div>
+        <a href="index.html">Home</a>
+        <a href="#products">Shop</a>
+        <a href="#footer">Contact</a>
+        <a href="#products">Bag (<span id="cartCount">0</span>)</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <small>Made with love & cocoa</small>
+    <h1>A little piece of <span>happiness.</span></h1>
+    <p>
+        Discover handcrafted chocolate delights,<br>
+        made to turn every moment into something special.
+    </p>
+</header>
+
+<!-- CATEGORIES -->
+<div class="categories">
+    <a href="#products">All Chocolates</a>
+    <a href="#dark">Dark Chocolate</a>
+    <a href="#milk">Milk Chocolate</a>
+    <a href="#special">Special Treats</a>
+</div>
+
+<!-- PRODUCTS -->
+<main class="products" id="products">
+
+    <div class="section-heading">
+        <h2>Our Chocolate Collection</h2>
+        <p>20 little indulgences, unforgettable flavours.</p>
+    </div>
+
+    <div class="product-grid">
+
+        <!-- 1 -->
+        <article class="product-card" id="dark">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=600&q=80" alt="Dark chocolate">
+                <span class="tag">BESTSELLER</span>
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Midnight Velvet</h3>
+                <p class="description">Rich dark chocolate with an intense cocoa finish.</p>
+                <div class="product-bottom">
+                    <span class="price">₹249</span>
+                    <button class="add-btn" onclick="addToCart('Midnight Velvet',249)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="product-card" id="milk">
+            <div class="product-image">
+                <img src="silk.jfif" alt="Milk chocolate">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Silk & Cocoa</h3>
+                <p class="description">Smooth, creamy milk chocolate that melts in your mouth.</p>
+                <div class="product-bottom">
+                    <span class="price">₹199</span>
+                    <button class="add-btn" onclick="addToCart('Silk & Cocoa',199)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="coco.jfif" alt="Assorted chocolates">
+                <span class="tag">GIFT PICK</span>
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Golden Moments</h3>
+                <p class="description">A beautiful assortment of chocolates for gifting.</p>
+                <div class="product-bottom">
+                    <span class="price">₹399</span>
+                    <button class="add-btn" onclick="addToCart('Golden Moments',399)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1575377427642-087cf684f29d?auto=format&fit=crop&w=600&q=80" alt="Chocolate truffles">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Truffle Dreams</h3>
+                <p class="description">Soft, velvety truffles for a luxurious treat.</p>
+                <div class="product-bottom">
+                    <span class="price">₹299</span>
+                    <button class="add-btn" onclick="addToCart('Truffle Dreams',299)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80" alt="Chocolate brownies">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Brownie Bliss</h3>
+                <p class="description">Fudgy brownies packed with rich chocolate flavour.</p>
+                <div class="product-bottom">
+                    <span class="price">₹179</span>
+                    <button class="add-btn" onclick="addToCart('Brownie Bliss',179)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="product-card" id="special">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=600&q=80" alt="Chocolate gift box">
+                <span class="tag">SPECIAL GIFT</span>
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Love in a Box</h3>
+                <p class="description">A thoughtful chocolate gift for someone special.</p>
+                <div class="product-bottom">
+                    <span class="price">₹499</span>
+                    <button class="add-btn" onclick="addToCart('Love in a Box',499)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80" alt="Chocolate cookies">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★☆</div>
+                <h3>Choco Crunch</h3>
+                <p class="description">Crunchy cookies with delicious chocolate chips.</p>
+                <div class="product-bottom">
+                    <span class="price">₹149</span>
+                    <button class="add-btn" onclick="addToCart('Choco Crunch',149)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=600&q=80" alt="Hazelnut chocolate">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Hazelnut Heaven</h3>
+                <p class="description">Roasted hazelnuts wrapped in silky chocolate.</p>
+                <div class="product-bottom">
+                    <span class="price">₹279</span>
+                    <button class="add-btn" onclick="addToCart('Hazelnut Heaven',279)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1582176604856-e824b4736522?auto=format&fit=crop&w=600&q=80" alt="White chocolate">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★☆</div>
+                <h3>Ivory Dream</h3>
+                <p class="description">Delicate white chocolate with creamy sweetness.</p>
+                <div class="product-bottom">
+                    <span class="price">₹229</span>
+                    <button class="add-btn" onclick="addToCart('Ivory Dream',229)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=600&q=80" alt="Caramel chocolates">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Caramel Kiss</h3>
+                <p class="description">Sweet caramel flavours blended with smooth chocolate.</p>
+                <div class="product-bottom">
+                    <span class="price">₹259</span>
+                    <button class="add-btn" onclick="addToCart('Caramel Kiss',259)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Chocolate cake">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Chocolate Cloud</h3>
+                <p class="description">A rich chocolate cake for your celebrations.</p>
+                <div class="product-bottom">
+                    <span class="price">₹549</span>
+                    <button class="add-btn" onclick="addToCart('Chocolate Cloud',549)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=600&q=80" alt="Chocolate doughnuts">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★☆</div>
+                <h3>Choco Rings</h3>
+                <p class="description">Soft doughnuts topped with a chocolate glaze.</p>
+                <div class="product-bottom">
+                    <span class="price">₹129</span>
+                    <button class="add-btn" onclick="addToCart('Choco Rings',129)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 13 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" alt="Chocolate cupcakes">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Velvet Cupcakes</h3>
+                <p class="description">Mini chocolate cakes with a creamy topping.</p>
+                <div class="product-bottom">
+                    <span class="price">₹189</span>
+                    <button class="add-btn" onclick="addToCart('Velvet Cupcakes',189)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 14 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?auto=format&fit=crop&w=600&q=80" alt="Chocolate dessert">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Berry Romance</h3>
+                <p class="description">A sweet berry-inspired chocolate indulgence.</p>
+                <div class="product-bottom">
+                    <span class="price">₹349</span>
+                    <button class="add-btn" onclick="addToCart('Berry Romance',349)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 15 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1610450949065-1f2841536c88?auto=format&fit=crop&w=600&q=80" alt="Chocolate fudge">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★☆</div>
+                <h3>Fudge Fantasy</h3>
+                <p class="description">Soft, rich chocolate fudge for sweet cravings.</p>
+                <div class="product-bottom">
+                    <span class="price">₹219</span>
+                    <button class="add-btn" onclick="addToCart('Fudge Fantasy',219)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 16 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80" alt="Brownie bites">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Brownie Bites</h3>
+                <p class="description">Bite-sized brownie squares full of cocoa flavour.</p>
+                <div class="product-bottom">
+                    <span class="price">₹159</span>
+                    <button class="add-btn" onclick="addToCart('Brownie Bites',159)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 17 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="minty.jfif" alt ="Mint chocolate">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★☆</div>
+                <h3>Minty Magic</h3>
+                <p class="description">Refreshing mint flavours meet smooth chocolate.</p>
+                <div class="product-bottom">
+                    <span class="price">₹239</span>
+                    <button class="add-btn" onclick="addToCart('Minty Magic',239)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 18 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=600&q=80" alt="Sea salt dark chocolate">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Sea Salt Luxe</h3>
+                <p class="description">Dark chocolate finished with a touch of sea salt.</p>
+                <div class="product-bottom">
+                    <span class="price">₹289</span>
+                    <button class="add-btn" onclick="addToCart('Sea Salt Luxe',289)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 19 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=600&q=80" alt="Chocolate pralines">
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Royal Pralines</h3>
+                <p class="description">Elegant chocolates with a delicious nutty centre.</p>
+                <div class="product-bottom">
+                    <span class="price">₹329</span>
+                    <button class="add-btn" onclick="addToCart('Royal Pralines',329)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- 20 -->
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=600&q=80" alt="Premium chocolate hamper">
+                <span class="tag">PREMIUM</span>
+            </div>
+            <div class="product-info">
+                <div class="rating">★★★★★</div>
+                <h3>Grand Cocoa Hamper</h3>
+                <p class="description">A premium chocolate collection for special occasions.</p>
+                <div class="product-bottom">
+                    <span class="price">₹799</span>
+                    <button class="add-btn" onclick="addToCart('Grand Cocoa Hamper',799)">+ Add to Bag</button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer id="footer">
+    <h2>ChocoHub.</h2>
+    <p>Sweetness brings us together.</p>
+    <p>Crafted with cocoa, wrapped with love.</p>
+    <p>© 2026 ChocoHub. All rights reserved.</p>
+</footer>
+
+<!-- CART NOTIFICATION -->
+<div class="cart-message" id="cartMessage"></div>
+
+<script>
+let cart = 0;
+let cartTotal = 0;
+
+function addToCart(productName, price) {
+    cart++;
+    cartTotal += price;
+
+    document.getElementById("cartCount").textContent = cart;
+
+    const message = document.getElementById("cartMessage");
+    message.textContent = productName + " added to bag! Cart total: ₹" + cartTotal;
+    message.style.display = "block";
+
+    clearTimeout(window.cartTimer);
+
+    window.cartTimer = setTimeout(function() {
+        message.style.display = "none";
+    }, 2500);
+}
+</script>
+
+</body>
+</html>

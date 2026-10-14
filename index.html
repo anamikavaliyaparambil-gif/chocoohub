@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChocoHub | Sweetness Brings Us Together</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fffaf5;
+            color: #402319;
+        }
+
+        /* NAVIGATION */
+
+        header {
+            background: #fffaf5;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 15px rgba(64, 35, 25, 0.08);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: #49271b;
+        }
+
+        .logo span {
+            color: #b47a4d;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #53382b;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #b47a4d;
+        }
+
+        .cart-count {
+            display: inline-block;
+            background: #4a2418;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 50%;
+            font-size: 11px;
+        }
+
+        /* HERO SECTION */
+
+        .hero {
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 65px 8%;
+            background: linear-gradient(120deg, #f8ede1, #edcfb4);
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .subtitle {
+            color: #a46b42;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 5vw, 66px);
+            line-height: 1.15;
+            font-weight: 500;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #a66a43;
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 14px;
+            color: #785b4b;
+            line-height: 1.9;
+            margin-bottom: 28px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #49271b;
+            color: white;
+            padding: 13px 27px;
+            border: 1px solid #49271b;
+            border-radius: 30px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #a66a43;
+            border-color: #a66a43;
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            flex: 1;
+            max-width: 500px;
+            height: 390px;
+            overflow: hidden;
+            border-radius: 48% 48% 8px 8px;
+            box-shadow: 0 15px 40px rgba(64, 35, 25, 0.15);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* FEATURES */
+
+        .features {
+            background: #49271b;
+            color: #fff0df;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 25px 5%;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .feature strong {
+            display: block;
+            color: #e7bd97;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        /* SECTION HEADING */
+
+        .section-heading {
+            text-align: center;
+            padding: 70px 20px 35px;
+        }
+
+        .section-heading small {
+            color: #a66a43;
+            letter-spacing: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 500;
+            margin-top: 12px;
+        }
+
+        .section-heading p {
+            font-size: 13px;
+            color: #897064;
+            margin-top: 12px;
+        }
+
+        /* PRODUCTS */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
+            padding: 10px 8% 75px;
+        }
+
+        .product-card {
+            background: #fffdf9;
+            border: 1px solid #eee0d3;
+            border-radius: 12px;
+            overflow: hidden;
+            padding-bottom: 22px;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 30px rgba(64, 35, 25, 0.12);
+        }
+
+        .product-image {
+            height: 210px;
+            overflow: hidden;
+            background: #efdfd0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.06);
+        }
+
+        .product-info {
+            padding: 17px 15px 0;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            font-size: 11px;
+            color: #897064;
+            line-height: 1.7;
+            min-height: 38px;
+        }
+
+        .price {
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 12px 0;
+            color: #8e5131;
+        }
+
+        .add-btn {
+            border: none;
+            background: #49271b;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #a66a43;
+        }
+
+        /* SPECIAL OFFER */
+
+        .offer {
+            margin: 0 8% 75px;
+            padding: 45px 6%;
+            background: linear-gradient(120deg, #efd4ba, #f7e8d8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .offer-content {
+            flex: 1;
+        }
+
+        .offer small {
+            color: #a66a43;
+            letter-spacing: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .offer h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 500;
+            margin: 15px 0;
+        }
+
+        .offer h2 span {
+            color: #a66a43;
+        }
+
+        .offer p {
+            color: #785b4b;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 23px;
+        }
+
+        .offer-image {
+            flex: 1;
+            max-width: 400px;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .offer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ABOUT */
+
+        .about {
+            padding: 10px 8% 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 55px;
+        }
+
+        .about-image {
+            flex: 1;
+            max-width: 450px;
+            height: 280px;
+            border-radius: 45% 12px 45% 12px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content small {
+            color: #a66a43;
+            font-size: 11px;
+            letter-spacing: 4px;
+            font-weight: 600;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 500;
+            margin: 15px 0;
+        }
+
+        .about-content p {
+            color: #80685a;
+            font-size: 13px;
+            line-height: 2;
+            margin-bottom: 22px;
+        }
+
+        /* NEWSLETTER */
+
+        .newsletter {
+            background: #f3e4d5;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .newsletter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .newsletter p {
+            color: #80685a;
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        .newsletter input {
+            width: 270px;
+            max-width: 100%;
+            padding: 13px;
+            border: 1px solid #d5bba5;
+            background: #fffaf5;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            border-radius: 25px;
+            margin-right: 7px;
+        }
+
+        .newsletter button {
+            margin-top: 8px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #321a12;
+            color: #f9e9dc;
+            padding: 45px 8% 20px;
+            text-align: center;
+        }
+
+        footer h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        footer h2 span {
+            color: #d4a078;
+        }
+
+        footer p {
+            color: #d0b6a4;
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #f4dfcf;
+            font-size: 12px;
+        }
+
+        .footer-links a:hover {
+            color: #d4a078;
+        }
+
+        .copyright {
+            border-top: 1px solid #674638;
+            padding-top: 18px;
+            margin-top: 20px;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 1000px) {
+            .products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .hero {
+                padding: 50px 6%;
+            }
+
+            .hero-image {
+                height: 330px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            header {
+                padding: 16px 5%;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 26px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 17px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 45px 6%;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .hero-image {
+                width: 100%;
+                height: 300px;
+            }
+
+            .features {
+                gap: 22px;
+            }
+
+            .feature {
+                width: 40%;
+            }
+
+            .section-heading h2 {
+                font-size: 32px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+                padding: 10px 7% 55px;
+            }
+
+            .product-image {
+                height: 260px;
+            }
+
+            .offer {
+                margin: 0 5% 55px;
+                padding: 35px 7%;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .offer h2 {
+                font-size: 34px;
+            }
+
+            .offer-image {
+                width: 100%;
+            }
+
+            .about {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .about-image {
+                width: 100%;
+            }
+
+            .about-content h2 {
+                font-size: 32px;
+            }
+
+            .newsletter input {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+
+    <header>
+        <a href="#home" style="text-decoration:none">
+            <div class="logo">Choco<span>Hub</span></div>
+        </a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#offers">Offers</a>
+            <a href="#contact">Contact</a>
+            <a href="#shop">Cart <span class="cart-count" id="cartCount">0</span></a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+            <div class="subtitle">PREMIUM CHOCOLATES</div>
+
+            <h1>
+                Small Bites<br>
+                of <span>Happiness</span>
+            </h1>
+
+            <p>
+                Discover a world of rich flavours, handcrafted
+                with love, and made to turn your everyday moments
+                into something extraordinary.
+            </p>
+
+            <a href="#shop" class="btn">Explore Chocolates →</a>
+        </div>
+
+        <div class="hero-image">
+            <img
+                src="first.webp"
+                alt="Delicious premium chocolate">
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+
+    <section class="features">
+
+        <div class="feature">
+            <strong>✧ Premium Quality</strong>
+            Finest ingredients
+        </div>
+
+        <div class="feature">
+            <strong>♡ Made with Love</strong>
+            Handcrafted goodness
+        </div>
+
+        <div class="feature">
+            <strong>✦ Fresh Delivery</strong>
+            Straight to your doorstep
+        </div>
+
+        <div class="feature">
+            <strong>◇ Secure Shopping</strong>
+            Shop with confidence
+        </div>
+
+    </section>
+
+    <!-- PRODUCTS HEADING -->
+
+    <section id="shop">
+
+        <div class="section-heading">
+            <small>OUR SPECIALTIES</small>
+            <h2>Featured Chocolates</h2>
+            <p>A little luxury in every bite.</p>
+        </div>
+
+        <!-- PRODUCT CARDS -->
+
+        <div class="products">
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=700&q=80"
+                        alt="Dark chocolate bar">
+                </div>
+
+                <div class="product-info">
+                    <h3>Dark Chocolate</h3>
+                    <p>Rich, intense, and full of flavour.</p>
+                    <span class="price">₹150</span>
+                    <button class="add-btn" onclick="addToCart('Dark Chocolate', 150)">
+                        Add to Cart +
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=700&q=80"
+                        alt="Chocolate truffles">
+                </div>
+
+                <div class="product-info">
+                    <h3>Chocolate Truffles</h3>
+                    <p>A melt-in-your-mouth delight.</p>
+                    <span class="price">₹180</span>
+                    <button class="add-btn" onclick="addToCart('Chocolate Truffles', 180)">
+                        Add to Cart +
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img
+                        src="milk.jpg"
+                        alt="Milk chocolate">
+                </div>
+
+                <div class="product-info">
+                    <h3>Milk Chocolate</h3>
+                    <p>Smooth, creamy, and delicious.</p>
+                    <span class="price">₹130</span>
+                    <button class="add-btn" onclick="addToCart('Milk Chocolate', 130)">
+                        Add to Cart +
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img
+                        src="chocos.jpg"
+                        alt="Assorted chocolates"
+                        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1548907040-4d42a6b4e5a4?auto=format&fit=crop&w=700&q=80'">
+                </div>
+
+                <div class="product-info">
+                    <h3>Chocolate Box</h3>
+                    <p>A perfect little box of happiness.</p>
+                    <span class="price">₹220</span>
+                    <button class="add-btn" onclick="addToCart('Chocolate Box', 220)">
+                        Add to Cart +
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SPECIAL OFFER -->
+
+    <section class="offer" id="offers">
+
+        <div class="offer-content">
+            <small>A LITTLE SOMETHING SPECIAL</small>
+
+            <h2>
+                Flat <span>20% Off</span><br>
+                Chocolate Boxes
+            </h2>
+
+            <p>
+                Because every moment deserves a little more chocolate.
+                Share sweetness with the people you love.
+            </p>
+
+            <a href="#shop" class="btn">Shop Now →</a>
+        </div>
+
+        <div class="offer-image">
+            <img
+                src="choco.jpg"
+                alt="Special chocolate gift">
+        </div>
+
+    </section>
+
+    <!-- ABOUT SECTION -->
+
+    <section class="about" id="about">
+
+        <div class="about-image">
+            <img
+                src=""
+                alt="Our chocolate collection">
+        </div>
+
+        <div class="about-content">
+            <small>ABOUT CHOCOHUB</small>
+
+            <h2>More Than Just Chocolate</h2>
+
+            <p>
+                At ChocoHub, we believe chocolate is more than a treat.
+                It is an emotion, a memory, and a little moment of joy.
+                We bring you delicious chocolates made to sweeten
+                life's special moments.
+            </p>
+
+            <a href="#contact" class="btn">Discover Our Story</a>
+        </div>
+
+    </section>
+
+    <!-- NEWSLETTER -->
+
+    <section class="newsletter">
+        <h2>A Little Sweetness in Your Inbox</h2>
+
+        <p>
+            Join the ChocoHub family for sweet updates and special offers.
+        </p>
+
+        <form onsubmit="subscribe(event)">
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email address"
+                required>
+
+            <button type="submit" class="btn">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer id="contact">
+
+        <h2>Choco<span>Hub</span></h2>
+
+        <p>Sweetness brings us together.</p>
+
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About Us</a>
+            <a href="#offers">Offers</a>
+            <a href="mailto:hello@chocohub.com">Email Us</a>
+        </div>
+
+        <p>Made with ♡ for every chocolate lover.</p>
+
+        <div class="copyright">
+            <p>© 2026 ChocoHub. All rights reserved.</p>
+        </div>
+
+    </footer>
+
+    <!-- SIMPLE JAVASCRIPT FOR BUTTONS -->
+
+    <script>
+        let cart = [];
+        let cartTotal = 0;
+
+        function addToCart(name, price) {
+            cart.push({
+                name: name,
+                price: price
+            });
+
+            cartTotal++;
+
+            document.getElementById("cartCount").textContent = cartTotal;
+
+            alert(name + " added to your cart!");
+        }
+
+        function subscribe(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+
+            alert("Thank you for joining ChocoHub!");
+
+            document.getElementById("email").value = "";
+        }
+    </script>
+
+</body>
+</html>
